@@ -1,0 +1,71 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Point of Sale Dashboard";
+}
+
+
+    <header>
+        <h1>Point of Sale Dashboard</h1>
+    </header>
+
+    <style>
+    section {
+  
+        padding: 20px;
+        margin: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    a{
+        text-decoration:none
+    }
+    #dashboard-boxes{
+        display:flex;
+    }
+
+    #sales {
+        background-color: #ff0000;
+    }
+
+    #products {
+        background-color: #00ff00;
+    }
+
+    #transactions {
+        background-color: #0000ff;
+    }
+
+    </style>
+
+    <nav>
+        <ul>
+            <li><a href="#sales">Sales</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#transactions">Transactions</a></li>
+        </ul>
+    </nav>
+
+    <main id="dashboard-boxes">
+        <section id="sales">
+        <h2>
+            <a asp-page="/Products/index">Start New Sale</a>
+        </h2>
+            <div id="sales-box"></div>
+        </section>
+
+        <section id="reports">
+            <h2>Reports</h2>
+            <div id="report-box"></div>
+        </section>           
+
+        <section id="settings">
+            <h2>Settings</h2>
+            <div id="settings-box"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright © 2021 My Point of Sale Dashboard</p>
+    </footer>

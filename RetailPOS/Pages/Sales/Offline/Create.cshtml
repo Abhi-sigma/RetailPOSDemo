@@ -1,0 +1,115 @@
+﻿@page
+@model RetailPOS.Pages.Sales.Offline.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OfflineSales</h4>
+<hr />
+<div class="row">
+    <div class="offset-md-4 col-md-4">
+        <form asp-page-handler="GetProducts" method="post" onsubmit="return false">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <input  onChange="makeAjaxRequestonChange(event)"type = "text" name="hint"/>
+                <button>Search product</button> 
+                <div hidden id="loading-products"class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <div id="product_suggestions"></div>
+                </div>
+         
+        </form>
+        </div>
+        </div>
+<div class="row">
+    <div class="offset-md-2 col-md-6">
+    <h1 hidden id="sale-header">Sale Items</h1>
+    <div id="sale_container"></div>
+        <div hidden id="total_cost_container">
+            <span>Total Cost</span>
+            <span id="total_cost"></span>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden id="pay-btn">Pay Now</button>
+        </div>
+        </div>
+        </div>
+
+<div class="row">
+    <div class="offset-md-2 col-md-6">
+        <div id="modal_container">
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Payment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="savesaleform" asp-page-handler="SaveSales" method="post" onsubmit="return false">
+                                <button onclick="submitSaleJson()" type="button" class="btn btn-primary">Save</button>
+                                <button onclick="jsontoHtmlTable()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropPrintModal">Print</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>
+
+
+<div class="row">
+    <div class="offset-md-2 col-md-6">
+        <div id="modal_container_print">
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdropPrintModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Payment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal_body_print">
+
+                            <button onclick="PrintContent()" type="button" class="btn btn-primary">Print Receipt</button>
+                              
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+       
+
+        
+      
+    
+    </div>
+</div>
+ 
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+
+<script ></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
